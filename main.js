@@ -64,5 +64,7 @@ function imgHandel(theImage) {
     alt="Post Photo"
     class="img-fluid rounded"
   />`;
+  } else {
+    return ``;
   }
 }
