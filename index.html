@@ -7,12 +7,21 @@
     <title>Social Media Website</title>
 
     <!-- Import Bootstrap -->
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <link
+      href="https://fastly.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
     />
-    <!-- CSS File -->
+    <script
+      src="https://fastly.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Import Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Import CSS File -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -66,266 +75,14 @@
       <!-- Start Posts -->
       <div class="d-flex justify-content-center">
         <div class="col-9">
-          <div id="posts">
-            <!-- Start Post -->
-            <div class="card mt-4 shadow">
-              <div class="card-header">
-                <img
-                  src="profile-pics/1.png"
-                  alt="User Photo"
-                  class="rounded-circle border border-2"
-                  style="height: 50px; width: 50px"
-                />
-                <b>@Omar</b>
-              </div>
-              <div class="card-body">
-                <img
-                  src="Placeholders/1.jpg"
-                  alt="Post Photo"
-                  class="img-fluid rounded"
-                />
-                <h6 class="mt-2" style="color: rgba(0, 0, 0, 0.555)">
-                  2 Min ago
-                </h6>
-
-                <h4>Hello World</h4>
-
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos
-                  sint corrupti aspernatur molestiae, accusamus possimus quidem
-                  cumque blanditiis iste modi ullam perferendis ducimus
-                  excepturi, eum, provident fuga enim vero sequi.
-                </p>
-
-                <hr />
-
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-pen"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"
-                    />
-                  </svg>
-                  <span>(3) Comments</span>
-                </div>
-              </div>
-            </div>
-            <!-- End Post -->
-
-            <!-- Start Post -->
-            <div class="card mt-4 shadow">
-              <div class="card-header">
-                <img
-                  src="profile-pics/1.png"
-                  alt="User Photo"
-                  class="rounded-circle border border-2"
-                  style="height: 50px; width: 50px"
-                />
-                <b>@Omar</b>
-              </div>
-              <div class="card-body">
-                <img
-                  src="Placeholders/1.jpg"
-                  alt="Post Photo"
-                  class="img-fluid rounded"
-                />
-                <h6 class="mt-2" style="color: rgba(0, 0, 0, 0.555)">
-                  2 Min ago
-                </h6>
-
-                <h4>Hello World</h4>
-
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos
-                  sint corrupti aspernatur molestiae, accusamus possimus quidem
-                  cumque blanditiis iste modi ullam perferendis ducimus
-                  excepturi, eum, provident fuga enim vero sequi.
-                </p>
-
-                <hr />
-
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-pen"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"
-                    />
-                  </svg>
-                  <span>(3) Comments</span>
-                </div>
-              </div>
-            </div>
-            <!-- End Post -->
-
-            <!-- Start Post -->
-            <div class="card mt-4 shadow">
-              <div class="card-header">
-                <img
-                  src="profile-pics/1.png"
-                  alt="User Photo"
-                  class="rounded-circle border border-2"
-                  style="height: 50px; width: 50px"
-                />
-                <b>@Omar</b>
-              </div>
-              <div class="card-body">
-                <img
-                  src="Placeholders/1.jpg"
-                  alt="Post Photo"
-                  class="img-fluid rounded"
-                />
-                <h6 class="mt-2" style="color: rgba(0, 0, 0, 0.555)">
-                  2 Min ago
-                </h6>
-
-                <h4>Hello World</h4>
-
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos
-                  sint corrupti aspernatur molestiae, accusamus possimus quidem
-                  cumque blanditiis iste modi ullam perferendis ducimus
-                  excepturi, eum, provident fuga enim vero sequi.
-                </p>
-
-                <hr />
-
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-pen"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"
-                    />
-                  </svg>
-                  <span>(3) Comments</span>
-                </div>
-              </div>
-            </div>
-            <!-- End Post -->
-
-            <!-- Start Post -->
-            <div class="card mt-4 shadow">
-              <div class="card-header">
-                <img
-                  src="profile-pics/1.png"
-                  alt="User Photo"
-                  class="rounded-circle border border-2"
-                  style="height: 50px; width: 50px"
-                />
-                <b>@Omar</b>
-              </div>
-              <div class="card-body">
-                <img
-                  src="Placeholders/1.jpg"
-                  alt="Post Photo"
-                  class="img-fluid rounded"
-                />
-                <h6 class="mt-2" style="color: rgba(0, 0, 0, 0.555)">
-                  2 Min ago
-                </h6>
-
-                <h4>Hello World</h4>
-
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos
-                  sint corrupti aspernatur molestiae, accusamus possimus quidem
-                  cumque blanditiis iste modi ullam perferendis ducimus
-                  excepturi, eum, provident fuga enim vero sequi.
-                </p>
-
-                <hr />
-
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-pen"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"
-                    />
-                  </svg>
-                  <span>(3) Comments</span>
-                </div>
-              </div>
-            </div>
-            <!-- End Post -->
-
-            <!-- Start Post -->
-            <div class="card mt-4 shadow">
-              <div class="card-header">
-                <img
-                  src="profile-pics/1.png"
-                  alt="User Photo"
-                  class="rounded-circle border border-2"
-                  style="height: 50px; width: 50px"
-                />
-                <b>@Omar</b>
-              </div>
-              <div class="card-body">
-                <img
-                  src="Placeholders/1.jpg"
-                  alt="Post Photo"
-                  class="img-fluid rounded"
-                />
-                <h6 class="mt-2" style="color: rgba(0, 0, 0, 0.555)">
-                  2 Min ago
-                </h6>
-
-                <h4>Hello World</h4>
-
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos
-                  sint corrupti aspernatur molestiae, accusamus possimus quidem
-                  cumque blanditiis iste modi ullam perferendis ducimus
-                  excepturi, eum, provident fuga enim vero sequi.
-                </p>
-
-                <hr />
-
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-pen"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"
-                    />
-                  </svg>
-                  <span>(3) Comments</span>
-                </div>
-              </div>
-            </div>
-            <!-- End Post -->
-          </div>
+          <div id="posts"></div>
         </div>
       </div>
       <!-- End Posts -->
     </div>
     <!-- Close Main Content -->
+
+    <!-- Import JavaScript file -->
+    <script src="main.js"></script>
   </body>
 </html>
