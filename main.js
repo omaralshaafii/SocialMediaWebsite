@@ -1,5 +1,8 @@
+// Global vars
 let baseUrl = "https://tarmeezacademy.com/api/v1",
   postContainer = document.getElementById("posts");
+const navBtnsLogedout = document.getElementById("nav-btns-logedout");
+const navBtnsLogedIn = document.getElementById("nav-btns-logedin");
 
 axios.get(`${baseUrl}/posts?limit=15`).then((response) => {
   let posts = response.data.data;
@@ -26,7 +29,7 @@ function addPosts(posts) {
         ${posts[i].created_at}
       </h6>
 
-      <h4>${posts[i].title}</h4>
+      <h4>${posts[i].title || ""}</h4>
 
       <p>${posts[i].body}</p>
 
@@ -50,16 +53,18 @@ function addPosts(posts) {
     </div>
   </div>
     `;
+    // TODO: show post tags
 
     postContainer.innerHTML += content;
   }
 }
 
+// Show user photo or defult photo
 function handelUserImage(userImage) {
   if (userImage.length > 0) {
     return `
     <img
-    src=${userImage}
+    src=${userImage} 
     alt="User Photo"
     class="rounded-circle border border-2"
     style="height: 50px; width: 50px"
@@ -75,14 +80,151 @@ function handelUserImage(userImage) {
   }
 }
 
+// Handel post photo
 function handelPostImage(theImage) {
   if (!theImage.length == 0) {
     return `<img
     src=${theImage}
     alt="Post Photo"
     class="img-fluid rounded"
+    style="width: 100%";
   />`;
   } else {
     return ``;
   }
 }
+
+// Login function
+function login() {
+  axios
+    .post(`${baseUrl}/login`, {
+      username: `${username.value}`,
+      password: `${password.value}`,
+    })
+    .then(function (response) {
+      console.log(response);
+
+      // Save token in localstorage
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      // Close modal
+      document.getElementById("login-moda-closer").click();
+
+      // Setup UI for loged in user
+      setupUI();
+
+      // show success login alert
+      showAlert("Nice, you loged in successfuly!");
+    })
+    .catch(function (error) {
+      console.log(error);
+
+      let errorMsg = error.response.data.message;
+
+      document.getElementById("login-error").innerHTML = `
+      <span style="color: red">${errorMsg}</span>
+      `;
+    });
+}
+
+// Show  notification alert
+function showAlert(msg) {
+  const alertPlaceholder = document.getElementById("theAlert");
+  const appendAlert = (message, type) => {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = [
+      `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+      `   <div>${message}</div>`,
+      '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+      "</div>",
+    ].join("");
+
+    alertPlaceholder.append(wrapper);
+  };
+
+  appendAlert(msg, "success");
+
+  // TODO: Hide alert after 3 sec
+
+  // setTimeout(() => {
+  //   const alert = bootstrap.Alert.getOrCreateInstance("#theAlert");
+  //   alert.close();
+  // }, 3000);
+}
+
+// Setup UI for loged in user function
+function setupUI() {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    // Add logout & username & photo in nav
+    navBtnsLogedout.style.display = "none";
+    navBtnsLogedIn.style.display = "block";
+
+    const userInfo = JSON.parse(localStorage.getItem("user"));
+    console.log(userInfo);
+
+    // Add user photo to nav
+    const userImage = userInfo.profile_image;
+    document
+      .querySelector("#nav-btns-logedin img")
+      .setAttribute(
+        "src",
+        userImage.length > 0 ? userImage : "profile-pics/1.png"
+      );
+
+    // Add username
+    document.querySelector(
+      "#nav-btns-logedin b"
+    ).innerHTML = `@${userInfo.username}`;
+  }
+}
+
+setupUI();
+
+// Logout function
+function logout() {
+  localStorage.clear();
+  navBtnsLogedIn.style.display = "none";
+  navBtnsLogedout.style.display = "block";
+  showAlert("You loged out successfuly!");
+}
+
+// Register function
+function register() {
+  let parames = {
+    username: regUsername.value,
+    name: regName.value,
+    password: regPassword.value,
+  };
+
+  axios
+    .post(`${baseUrl}/register`, parames)
+    .then((response) => {
+      console.log(response);
+
+      // Save token in localstorage
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      // Close modal
+      document.getElementById("register-moda-closer").click();
+
+      // Setup UI for loged in user
+      setupUI();
+
+      // show success login alert
+      showAlert("You have created the account successfully!");
+    })
+    .catch(function (error) {
+      console.log(error);
+
+      let errorMsg = error.response.data.message;
+
+      document.getElementById("register-error").innerHTML = `
+    <span style="color: red">${errorMsg}</span>
+    `;
+    });
+}
+

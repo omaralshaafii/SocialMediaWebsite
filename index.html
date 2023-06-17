@@ -24,65 +24,226 @@
     <!-- Import CSS File -->
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <!-- Start Navbar -->
-    <div class="container">
-      <div class="d-flex justify-content-center">
-        <div class="col-11">
-          <nav
-            class="navbar navbar-expand-lg bg-body-tertiary shadow rounded pt-3"
-          >
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Social Media</a>
-              <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"
-                      >Home</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                  </li>
-                </ul>
-                <button type="button" class="btn btn-outline-success mx-4">
-                  Login
-                </button>
-                <button type="button" class="btn btn-outline-success">
-                  Register
-                </button>
-              </div>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </div>
-    <!-- End Navbar -->
-
-    <!-- Start Main Content -->
-    <div class="container">
-      <!-- Start Posts -->
-      <div class="d-flex justify-content-center">
-        <div class="col-11">
-          <div id="posts"></div>
-        </div>
-      </div>
-      <!-- End Posts -->
-    </div>
-    <!-- Close Main Content -->
-
-    <!-- Import JavaScript file -->
-    <script src="main.js"></script>
-  </body>
+	<body>
+	   <!-- Start Navbar -->
+	   <div class="container">
+	      <div class="d-flex justify-content-center">
+		 <div class="col-11">
+		    <nav
+		       class="navbar navbar-expand-lg bg-body-tertiary shadow rounded pt-3"
+		       >
+		       <div class="container-fluid">
+		          <a class="navbar-brand" href="#">Social Media</a>
+		          <button
+		             class="navbar-toggler"
+		             type="button"
+		             data-bs-toggle="collapse"
+		             data-bs-target="#navbarSupportedContent"
+		             aria-controls="navbarSupportedContent"
+		             aria-expanded="false"
+		             aria-label="Toggle navigation"
+		             >
+		          <span class="navbar-toggler-icon"></span>
+		          </button>
+		          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+		                <li class="nav-item">
+		                   <a class="nav-link active" aria-current="page" href="#"
+		                      >Home</a
+		                      >
+		                </li>
+		                <li class="nav-item">
+		                   <a class="nav-link" href="#">Profile</a>
+		                </li>
+		             </ul>
+		             <div id="nav-btns-logedout">
+		                <button
+		                   type="button"
+		                   class="btn btn-outline-dark mx-4"
+		                   data-bs-toggle="modal"
+		                   data-bs-target="#loginModal"
+		                   >
+		                Login
+		                </button>
+		                <button
+		                   type="button"
+		                   class="btn btn-outline-success"
+		                   data-bs-toggle="modal"
+		                   data-bs-target="#RegisterModal"
+		                   >
+		                Register
+		                </button>
+		             </div>
+		             <div id="nav-btns-logedin" style="display: none">
+		                <img
+		                   alt="User Photo"
+		                   class="rounded-circle border border-2"
+		                   style="height: 50px; width: 50px"
+		                   /><b style="margin-left: 2.5px"></b
+		                   ><button
+		                   id="logout"
+		                   type="button"
+		                   class="btn btn-outline-danger mx-2"
+		                   onclick="logout()"
+		                   >
+		                Logout
+		                </button>
+		             </div>
+		          </div>
+		       </div>
+		    </nav>
+		 </div>
+	      </div>
+	   </div>
+	   <!-- End Navbar -->
+	   <!-- Start Modals & Alerts -->
+	   <!-- Start Login Modal -->
+	   <div
+	      class="modal fade"
+	      id="loginModal"
+	      tabindex="-1"
+	      aria-labelledby="exampleModalLabel"
+	      aria-hidden="true"
+	      >
+	      <div class="modal-dialog">
+		 <div class="modal-content">
+		    <div class="modal-header">
+		       <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+		       <button
+		          type="button"
+		          class="btn-close"
+		          data-bs-dismiss="modal"
+		          aria-label="Close"
+		          ></button>
+		    </div>
+		    <div class="modal-body">
+		       <form>
+		          <div class="mb-3">
+		             <label for="username" class="col-form-label">Username:</label>
+		             <input
+		                type="text"
+		                class="form-control"
+		                id="username"
+		                value="omarsha6an"
+		                />
+		          </div>
+		          <div class="mb-3">
+		             <label for="password" class="col-form-label">Password:</label>
+		             <input
+		                type="password"
+		                class="form-control"
+		                id="password"
+		                value="123123"
+		                />
+		          </div>
+		       </form>
+		       <span style="color: red" id="login-error"></span>
+		    </div>
+		    <div class="modal-footer">
+		       <button
+		          type="button"
+		          class="btn btn-secondary"
+		          data-bs-dismiss="modal"
+		          id="login-moda-closer"
+		          >
+		       Close
+		       </button>
+		       <button
+		          type="button"
+		          id="the-login-btn"
+		          class="btn btn-success"
+		          onclick="login()"
+		          >
+		       Login
+		       </button>
+		    </div>
+		 </div>
+	      </div>
+	   </div>
+	   <!-- End Login Modals -->
+	   <!-- Start Register Modals -->
+	   <div
+	      class="modal fade"
+	      id="RegisterModal"
+	      tabindex="-1"
+	      aria-labelledby="exampleModalLabel"
+	      aria-hidden="true"
+	      >
+	      <div class="modal-dialog">
+		 <div class="modal-content">
+		    <div class="modal-header">
+		       <h1 class="modal-title fs-5" id="exampleModalLabel">Register</h1>
+		       <button
+		          type="button"
+		          class="btn-close"
+		          data-bs-dismiss="modal"
+		          aria-label="Close"
+		          ></button>
+		    </div>
+		    <div class="modal-body">
+		       <form>
+		          <div class="mb-3">
+		             <label for="regName" class="col-form-label">Name:</label>
+		             <input type="text" class="form-control" id="regName" />
+		          </div>
+		          <div class="mb-3">
+		             <label for="regUsername" class="col-form-label"
+		                >Username:</label
+		                >
+		             <input type="text" class="form-control" id="regUsername" />
+		          </div>
+		          <div class="mb-3">
+		             <label for="regPassword" class="col-form-label"
+		                >Password:</label
+		                >
+		             <input type="password" class="form-control" id="regPassword" />
+		          </div>
+		          <div class="mb-3">
+		             <label for="profilePic" class="col-form-label"
+		                >Choose Photo:</label
+		                >
+		             <input type="file" class="form-control" id="profilePic" />
+		          </div>
+		       </form>
+		       <span style="color: red" id="register-error"></span>
+		    </div>
+		    <div class="modal-footer">
+		       <button
+		          id="register-moda-closer"
+		          type="button"
+		          class="btn btn-secondary"
+		          data-bs-dismiss="modal"
+		          >
+		       Close
+		       </button>
+		       <button type="button" class="btn btn-success" onclick="register()">
+		       Register
+		       </button>
+		    </div>
+		 </div>
+	      </div>
+	   </div>
+	   <!-- End Register Modals -->
+	   <!-- Start alert -->
+	   <div
+	      id="theAlert"
+	      class="show fade"
+	      style="position: fixed; bottom: 0; right: 0; width: 30%; z-index: 9999999"
+	      ></div>
+	   <!-- End  alert -->
+	   <!-- End Modals & Alerts -->
+	   <!-- Start Main Content -->
+	   <div class="container">
+	      <!-- Start Posts -->
+	      <div class="d-flex justify-content-center">
+		 <div class="col-11">
+		    <div id="posts"></div>
+		 </div>
+	      </div>
+	      <!-- End Posts -->
+	   </div>
+	   <!-- Close Main Content -->
+	   <!-- Import JavaScript file -->
+	   <script src="main.js"></script>
+	</body>
 </html>
