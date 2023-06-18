@@ -1,3 +1,23 @@
 body {
   background-color: #f0ecff;
 }
+
+#add-post {
+  width: 75px;
+  height: 75px;
+  text-align: center;
+  color: white;
+  font-size: 75px;
+  position: fixed;
+  bottom: 20px;
+  right: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999;
+  display: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}
+

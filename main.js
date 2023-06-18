@@ -4,16 +4,20 @@ let baseUrl = "https://tarmeezacademy.com/api/v1",
 const navBtnsLogedout = document.getElementById("nav-btns-logedout");
 const navBtnsLogedIn = document.getElementById("nav-btns-logedin");
 
-axios.get(`${baseUrl}/posts?limit=15`).then((response) => {
-  let posts = response.data.data;
-  console.log(posts);
+function getPosts() {
+  axios.get(`${baseUrl}/posts?limit=15`).then((response) => {
+    let posts = response.data.data;
+    console.log(posts);
 
-  // Add posts to the page
-  addPosts(posts);
-});
+    // Add posts to the page
+    addPostsToPage(posts);
+  });
+}
+
+getPosts();
 
 // Add posts to the page function
-function addPosts(posts) {
+function addPostsToPage(posts) {
   for (let i = 0; i < posts.length; i++) {
     let content = `
     <div class="card mt-4 shadow">
@@ -122,11 +126,12 @@ function login() {
 
       let errorMsg = error.response.data.message;
 
-      document.getElementById("login-error").innerHTML = `
-      <span style="color: red">${errorMsg}</span>
+      document.getElementById("login-error").textContent = `${errorMsg}
       `;
     });
 }
+
+document.getElementById("the-login-btn").addEventListener("click", login);
 
 // Show  notification alert
 function showAlert(msg) {
@@ -178,6 +183,9 @@ function setupUI() {
     document.querySelector(
       "#nav-btns-logedin b"
     ).innerHTML = `@${userInfo.username}`;
+
+    // Add + sign: posts creater
+    document.getElementById("add-post").style.display = "flex";
   }
 }
 
@@ -188,19 +196,25 @@ function logout() {
   localStorage.clear();
   navBtnsLogedIn.style.display = "none";
   navBtnsLogedout.style.display = "block";
+  document.getElementById("add-post").style.display = "none";
   showAlert("You loged out successfuly!");
 }
 
+document.getElementById("logout").addEventListener("click", logout);
+
 // Register function
 function register() {
-  let parames = {
-    username: regUsername.value,
-    name: regName.value,
-    password: regPassword.value,
-  };
+  let profilePicInput = profilePic.files[0];
+
+  let formData = new FormData();
+
+  formData.append("username", regUsername.value);
+  formData.append("name", regName.value);
+  formData.append("password", regPassword.value);
+  formData.append("image", profilePicInput);
 
   axios
-    .post(`${baseUrl}/register`, parames)
+    .post(`${baseUrl}/register`, formData)
     .then((response) => {
       console.log(response);
 
@@ -209,7 +223,7 @@ function register() {
       localStorage.setItem("user", JSON.stringify(response.data.user));
 
       // Close modal
-      document.getElementById("register-moda-closer").click();
+      document.getElementById("register-modal-closer").click();
 
       // Setup UI for loged in user
       setupUI();
@@ -222,9 +236,55 @@ function register() {
 
       let errorMsg = error.response.data.message;
 
-      document.getElementById("register-error").innerHTML = `
-    <span style="color: red">${errorMsg}</span>
+      document.getElementById("register-error").textContent = `${errorMsg}
     `;
     });
 }
+
+document.getElementById("register-btn").addEventListener("click", register);
+
+// Post new post
+function newPost() {
+  let formData = new FormData();
+
+  let postTitle = document.getElementById("post-title").value;
+  let postBody = document.getElementById("post-body").value;
+  let postImage = document.getElementById("post-image").files[0];
+
+  formData.append("title", postTitle);
+  formData.append("body", postBody);
+  //make post without imge allowed
+  if (postImage != undefined) {
+    formData.append("image", postImage);
+  }
+
+  let headers = {
+    authorization: `Bearer ${localStorage.getItem("token")}`,
+  };
+
+  axios
+    .post(`${baseUrl}/posts`, formData, { headers: headers })
+    .then((response) => {
+      console.log(response);
+
+      // Close modal
+      document.getElementById("post-modal-closer").click();
+
+      // show success login alert
+      showAlert("Post uploaded successfully!");
+
+      // TODO: Show new post at the home page after the sendding the post
+      // getPosts();
+    })
+    .catch((error) => {
+      console.log(error);
+
+      let errorMsg = error.response.data.message;
+
+      document.getElementById("newpost-error").textContent = `${errorMsg}
+  `;
+    });
+}
+
+document.getElementById("addPostBtn").addEventListener("click", newPost);
 
