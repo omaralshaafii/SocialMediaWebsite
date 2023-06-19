@@ -156,18 +156,17 @@ document.getElementById("addPostBtn").addEventListener("click", newPost);
 window.addEventListener("scroll", () => {
   let isEnd;
   function isEndOfPage() {
-    // Check if the user is using a mobile device
-    const isMobileDevice = /Mobi/.test(navigator.userAgent);
-
-    // Calculate the scroll position based on the device type
-    const scrollPosition = isMobileDevice
-      ? window.innerHeight + window.pageYOffset
-      : document.documentElement.scrollHeight -
-        window.innerHeight -
-        window.pageYOffset;
+    const scrollPosition = Math.max(
+      window.pageYOffset,
+      document.documentElement.scrollTop,
+      document.body.scrollTop
+    );
 
     // Check if the user has reached the end of the page
-    isEnd = scrollPosition <= 1;
+    isEnd =
+      scrollPosition + window.innerHeight >=
+      document.documentElement.scrollHeight;
+
     console.log(isEnd);
   }
 
