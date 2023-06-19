@@ -97,7 +97,6 @@
     <!-- End Navbar -->
 
     <!-- Start Modals & Alerts -->
-
     <!-- Start Login Modal -->
     <div
       class="modal fade"
@@ -222,60 +221,6 @@
     </div>
     <!-- End Register Modal -->
 
-    <!-- Start Post modal -->
-    <div
-      class="modal fade"
-      id="postModal"
-      tabindex="-1"
-      aria-labelledby="theModalTitle"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="theModalTitle">New Post</h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="post-title" class="col-form-label">Title:</label>
-                <input type="text" class="form-control" id="post-title" />
-              </div>
-              <div class="mb-3">
-                <label for="post-body" class="col-form-label">Body:</label>
-                <textarea class="form-control" id="post-body"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="post-image" class="col-form-label">Image:</label>
-                <input type="file" class="form-control" id="post-image" />
-              </div>
-            </form>
-            <span style="color: red" id="newpost-error"></span>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-              id="post-modal-closer"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary" id="addPostBtn">
-              Post
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Post modal -->
-
     <!-- Start alert -->
     <div
       id="theAlert"
@@ -285,36 +230,20 @@
     <!-- End  alert -->
     <!-- End Modals & Alerts -->
 
-    <!-- Start add post -->
-    <div
-      id="add-post"
-      class="bg-primary"
-      data-bs-toggle="modal"
-      data-bs-target="#postModal"
-    >
-      +
-    </div>
-    <!-- End add post -->
-
     <!-- Start Main Content -->
     <div class="container">
       <!-- Start Posts -->
-      <div class="d-flex justify-content-center">
+      <div class="row d-flex justify-content-center mt-5">
         <div class="col-11">
-          <div id="posts"></div>
+          <h2><span>Omar's</span> Post</h2>
+          <div id="post"></div>
         </div>
       </div>
       <!-- End Posts -->
     </div>
     <!-- Close Main Content -->
 
-    <!-- Import JavaScript file -->
-    <script>
-      function goPostDetails(postId) {
-        window.location = `PostDetails.html?id="${postId}"`;
-      }
-    </script>
-    <script type="module" src="mainLogic.js"></script>
-    <script type="module" src="homePage.js"></script>
+    <script src="mainLogic.js"></script>
+    <script src="postDetails.js"></script>
   </body>
 </html>

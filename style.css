@@ -21,3 +21,8 @@ body {
   justify-content: center;
 }
 
+.comment {
+  background-color: #f0ecff;
+  padding: 10px 20px;
+  border-radius: 7px;
+}
