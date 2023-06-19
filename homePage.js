@@ -154,10 +154,26 @@ document.getElementById("addPostBtn").addEventListener("click", newPost);
 
 // Infinite scrolling
 window.addEventListener("scroll", () => {
-  let endOfPage =
-    window.innerHeight + window.pageYOffset == document.body.offsetHeight;
+  let isEnd;
+  function isEndOfPage() {
+    // Check if the user is using a mobile device
+    const isMobileDevice = /Mobi/.test(navigator.userAgent);
 
-  if (endOfPage && currentPage <= lastPage) {
+    // Calculate the scroll position based on the device type
+    const scrollPosition = isMobileDevice
+      ? window.innerHeight + window.pageYOffset
+      : document.documentElement.scrollHeight -
+        window.innerHeight -
+        window.pageYOffset;
+
+    // Check if the user has reached the end of the page
+    isEnd = scrollPosition <= 1;
+    console.log(isEnd);
+  }
+
+  isEndOfPage();
+
+  if (isEnd && currentPage <= lastPage) {
     getPosts(currentPage + 1);
   }
 });
