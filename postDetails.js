@@ -33,7 +33,6 @@ function addPostToPage(post) {
     <b>@${post.author.username}</b>
   </div>
   <div
-    onclick="goPostDetails(${post.id})"
     class="card-body thePostBody"
     style="cursor: pointer"
   >
@@ -65,18 +64,11 @@ function addPostToPage(post) {
     </div>
     <hr />
 
-    <div id=comments">${handelComments(post.comments)}</div>
-    
-    <div class="input-group mt-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Comment..."
-        aria-describedby="basic-addon2"
-      />
-      <button class="btn btn-success">Comment</button>
+    <div id="comments">${handelComments(post.comments)}</div>
+
+     ${handelCommentsInput(post.id)}
+
     </div>
-  </div>
 </div>
 `;
   // TODO: show post tags
@@ -143,10 +135,84 @@ function handelComments(comments) {
   return `${commentsContainer.innerHTML}`;
 }
 
-/**
- 
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+function handelCommentsInput(postId) {
+  if (localStorage.getItem("token")) {
+    return `
+    <div class="input-group mt-3">
+      <input
+        id="commentInput"
+        type="text"
+        class="form-control"
+        placeholder="Comment..."
+        aria-describedby="basic-addon2"
+      />
+      <button class="btn btn-success" onclick="creatComment(${postId})">Comment</button>
+    </div>
+    `;
+  } else {
+    return ``;
+  }
+}
 
- */
+function creatComment(postId) {
+  let params = {
+    body: commentInput.value,
+  };
+
+  axios
+    .post(`${baseUrl}/posts/${postId}/comments`, params, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    .then((response) => {
+      let comment = response.data.data;
+
+      // Show comment at the page
+      document.getElementById("comments").innerHTML += `
+    <div class="comment mt-3">
+    <div class="commenter mb-2">
+      <img src="${
+        comment.author.profile_image.length > 0
+          ? comment.author.profile_image
+          : "profile-pics/1.png"
+      }" alt="UserImage" class="rounded-circle" style="width: 50px; height: 50px;" />
+      <span>@${comment.author.username}</span>
+    </div>
+    <div class="commentInfo">${comment.body}</div>
+  </div>
+    `;
+
+      // Empty the comment input
+      commentInput.value = "";
+
+      // Show succes alert
+      showAlert("The comment has been added successfully");
+    });
+}
+
+// SHow Alert function
+function showAlert(msg) {
+  const alertPlaceholder = document.getElementById("theAlert");
+  const appendAlert = (message, type) => {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = [
+      `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+      `   <div>${message}</div>`,
+      '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+      "</div>",
+    ].join("");
+
+    alertPlaceholder.append(wrapper);
+  };
+
+  appendAlert(msg, "success");
+
+  // TODO: Hide alert after 3 sec
+
+  // setTimeout(() => {
+  //   const alert = bootstrap.Alert.getOrCreateInstance("#theAlert");
+  //   alert.close();
+  // }, 3000);
+}
