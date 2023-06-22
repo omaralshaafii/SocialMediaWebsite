@@ -1,10 +1,5 @@
 // Global vars
-let baseUrl = "https://tarmeezacademy.com/api/v1",
-  postContainer = document.getElementById("posts");
-const navBtnsLogedout = document.getElementById("nav-btns-logedout");
-const navBtnsLogedIn = document.getElementById("nav-btns-logedin");
-let currentPage;
-let lastPage;
+postContainer = document.getElementById("posts");
 
 function getPosts(num) {
   axios.get(`${baseUrl}/posts?page=${num}`).then((response) => {
@@ -26,11 +21,21 @@ function addPostsToPage(posts) {
   for (let i = 0; i < posts.length; i++) {
     let content = `
     <div class="card mt-4 shadow">
-    <div class="card-header">
+    <div class="card-header d-flex" style="justify-content: space-between;">
 
+    <div class="authorInfo">
     ${handelUserImage(posts[i].author.profile_image)}
-
       <b>@${posts[i].author.username}</b>
+    </div>
+
+    ${checkPostOwner(
+      posts[i].author.id,
+      posts[i].id,
+      posts[i].title,
+      posts[i].body,
+      posts[i].image
+    )}
+
     </div>
     <div  onclick="goPostDetails(${
       posts[i].id
@@ -166,8 +171,6 @@ window.addEventListener("scroll", () => {
     isEnd =
       scrollPosition + window.innerHeight >=
       document.documentElement.scrollHeight;
-
-    console.log(isEnd);
   }
 
   isEndOfPage();
@@ -177,27 +180,9 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// Show  notification alert
-function showAlert(msg) {
-  const alertPlaceholder = document.getElementById("theAlert");
-  const appendAlert = (message, type) => {
-    const wrapper = document.createElement("div");
-    wrapper.innerHTML = [
-      `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-      `   <div>${message}</div>`,
-      '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-      "</div>",
-    ].join("");
-
-    alertPlaceholder.append(wrapper);
-  };
-
-  appendAlert(msg, "success");
-
-  // TODO: Hide alert after 3 sec
-
-  // setTimeout(() => {
-  //   const alert = bootstrap.Alert.getOrCreateInstance("#theAlert");
-  //   alert.close();
-  // }, 3000);
+// Go to details of the post
+function goPostDetails(postId) {
+  window.location = `postDetails.html?id=${postId}`;
 }
+
+// Check the owner of the post

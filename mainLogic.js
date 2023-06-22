@@ -156,3 +156,91 @@ function register() {
 }
 
 document.getElementById("register-btn").addEventListener("click", register);
+
+function checkPostOwner(authorId, postId, postTitle, postBody, postImage) {
+  let localedUser = JSON.parse(localStorage.getItem("user"));
+
+  if (localedUser != null) {
+    if (localedUser.id == authorId) {
+      return `
+              <div class="authorOptions">
+                <button
+                  class="btn btn-success editPostBtn"
+                  onclick="openEditPostModal('${postId}','${postTitle}', '${postBody}','${postImage}')"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editPostModal"
+                >
+                  Edit
+                </button>
+                <button class="btn btn-danger">Delete</button>
+              </div>
+      `;
+    } else {
+      return ``;
+    }
+  } else {
+    return ``;
+  }
+}
+
+// Open EditPostModal function
+let thePostId;
+function openEditPostModal(postId, postTitle, postBody, postImage) {
+  console.log(postTitle, postBody, postImage);
+  thePostId = postId;
+
+  let editTitle = document.getElementById("edit-title");
+  let editBody = document.getElementById("edit-body");
+
+  editTitle.value = postTitle;
+  editBody.value = postBody;
+}
+
+// Edit post function
+function editPost() {
+  let editTitle = document.getElementById("edit-title").value;
+  let editBody = document.getElementById("edit-body").value;
+  let postImage = document.getElementById("edit-image").files[0];
+
+  let formData = new FormData();
+  formData.append("title", editTitle);
+  formData.append("body", editBody);
+  formData.append("_method", "put");
+
+  console.log(editTitle);
+  console.log(editBody);
+  console.log(thePostId);
+
+  // make edit without imge allowed
+  if (postImage != undefined) {
+    formData.append("image", postImage);
+  }
+
+  let headers = {
+    "Content-Type": "multipart/formdata",
+    authorization: `Bearer ${localStorage.getItem("token")}`,
+  };
+
+  axios
+    .post(`${baseUrl}/posts/${thePostId}`, formData, { headers: headers })
+    .then((response) => {
+      console.log(response);
+
+      document.getElementById("edit-modal-closer").click();
+
+      // show success login alert
+      showAlert("Post edited successfully!");
+
+      // Show the new post at the home page after the sendding the post
+      if (window.location.pathname == "/postDetails.html") {
+        postElement.innerHTML = "";
+        getPost();
+      } else if (window.location.pathname == "/index.html") {
+        postContainer.innerHTML = "";
+        getPosts(1);
+      }
+    })
+    .catch((error) => {
+      document.getElementById("editpost-error").innerHTML = error.data.message;
+    });
+}

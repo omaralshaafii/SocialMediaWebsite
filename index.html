@@ -267,7 +267,7 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary" id="addPostBtn">
+            <button type="button" class="btn btn-success" id="addPostBtn">
               Post
             </button>
           </div>
@@ -276,11 +276,76 @@
     </div>
     <!-- End Post modal -->
 
+    <!-- Start edit post modal -->
+    <div
+      class="modal fade"
+      id="editPostModal"
+      tabindex="-1"
+      aria-labelledby="editTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="editTitle">Edit Post</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="edit-title" class="col-form-label">Title:</label>
+                <input type="text" class="form-control" id="edit-title" />
+              </div>
+              <div class="mb-3">
+                <label for="edit-body" class="col-form-label">Body:</label>
+                <textarea class="form-control" id="edit-body"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="edit-image" class="col-form-label">Image:</label>
+                <input type="file" class="form-control" id="edit-image" />
+              </div>
+            </form>
+            <span style="color: red" id="editpost-error"></span>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              id="edit-modal-closer"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              id="editPostBtn"
+              onclick="editPost()"
+            >
+              Edit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End edit post modal -->
+
     <!-- Start alert -->
     <div
       id="theAlert"
       class="show fade"
-      style="position: fixed; bottom: 0; right: 0; width: 50%; z-index: 9999999"
+      style="
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: fit-contetn;
+        z-index: 9999999;
+      "
     ></div>
     <!-- End  alert -->
     <!-- End Modals & Alerts -->
@@ -309,12 +374,7 @@
     <!-- Close Main Content -->
 
     <!-- Import JavaScript file -->
-    <script>
-      function goPostDetails(postId) {
-        window.location = `postDetails.html?id=${postId}`;
-      }
-    </script>
-    <script type="module" src="mainLogic.js"></script>
-    <script type="module" src="homePage.js"></script>
+    <script type="text/javascript" src="mainLogic.js"></script>
+    <script type="text/javascript" src="homePage.js"></script>
   </body>
 </html>
