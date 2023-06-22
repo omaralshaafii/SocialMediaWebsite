@@ -11,13 +11,11 @@
       href="https://fastly.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous"
-    />
+      crossorigin="anonymous" />
     <script
       src="https://fastly.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
 
     <!-- Import Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -30,8 +28,7 @@
       <div class="d-flex justify-content-center">
         <div class="col-11">
           <nav
-            class="navbar navbar-expand-lg bg-body-tertiary shadow rounded pt-3"
-          >
+            class="navbar navbar-expand-lg bg-body-tertiary shadow rounded pt-3">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">Social Media</a>
               <button
@@ -41,16 +38,13 @@
                 data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent"
                 aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"
-                      >Home</a
-                    >
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Profile</a>
@@ -61,16 +55,14 @@
                     type="button"
                     class="btn btn-outline-dark mx-4"
                     data-bs-toggle="modal"
-                    data-bs-target="#loginModal"
-                  >
+                    data-bs-target="#loginModal">
                     Login
                   </button>
                   <button
                     type="button"
                     class="btn btn-outline-success"
                     data-bs-toggle="modal"
-                    data-bs-target="#RegisterModal"
-                  >
+                    data-bs-target="#RegisterModal">
                     Register
                   </button>
                 </div>
@@ -78,13 +70,11 @@
                   <img
                     alt="User Photo"
                     class="rounded-circle border border-2"
-                    style="height: 50px; width: 50px"
-                  /><b style="margin-left: 2.5px"></b
-                  ><button
+                    style="height: 50px; width: 50px" /><b
+                    style="margin-left: 2.5px"></b><button
                     id="logout"
                     type="button"
-                    class="btn btn-outline-danger mx-2"
-                  >
+                    class="btn btn-outline-danger mx-2">
                     Logout
                   </button>
                 </div>
@@ -104,8 +94,7 @@
       id="loginModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+      aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -114,8 +103,7 @@
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+              aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <form>
@@ -125,8 +113,7 @@
                   type="text"
                   class="form-control"
                   id="username"
-                  value="omarsha6an"
-                />
+                  value="omarsha6an" />
               </div>
               <div class="mb-3">
                 <label for="password" class="col-form-label">Password:</label>
@@ -134,8 +121,7 @@
                   type="password"
                   class="form-control"
                   id="password"
-                  value="123123"
-                />
+                  value="123123" />
               </div>
             </form>
             <span style="color: red" id="login-error"></span>
@@ -145,8 +131,7 @@
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
-              id="login-moda-closer"
-            >
+              id="login-moda-closer">
               Close
             </button>
             <button type="button" id="the-login-btn" class="btn btn-success">
@@ -164,8 +149,7 @@
       id="RegisterModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+      aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -174,8 +158,7 @@
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+              aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <form>
@@ -184,21 +167,15 @@
                 <input type="text" class="form-control" id="regName" />
               </div>
               <div class="mb-3">
-                <label for="regUsername" class="col-form-label"
-                  >Username:</label
-                >
+                <label for="regUsername" class="col-form-label">Username:</label>
                 <input type="text" class="form-control" id="regUsername" />
               </div>
               <div class="mb-3">
-                <label for="regPassword" class="col-form-label"
-                  >Password:</label
-                >
+                <label for="regPassword" class="col-form-label">Password:</label>
                 <input type="password" class="form-control" id="regPassword" />
               </div>
               <div class="mb-3">
-                <label for="profilePic" class="col-form-label"
-                  >Choose Photo:</label
-                >
+                <label for="profilePic" class="col-form-label">Choose Photo:</label>
                 <input type="file" class="form-control" id="profilePic" />
               </div>
             </form>
@@ -209,8 +186,7 @@
               id="register-modal-closer"
               type="button"
               class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
+              data-bs-dismiss="modal">
               Close
             </button>
             <button type="button" class="btn btn-success" id="register-btn">
@@ -228,8 +204,7 @@
       id="postModal"
       tabindex="-1"
       aria-labelledby="theModalTitle"
-      aria-hidden="true"
-    >
+      aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -238,8 +213,7 @@
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+              aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <form>
@@ -263,8 +237,7 @@
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
-              id="post-modal-closer"
-            >
+              id="post-modal-closer">
               Close
             </button>
             <button type="button" class="btn btn-success" id="addPostBtn">
@@ -282,8 +255,7 @@
       id="editPostModal"
       tabindex="-1"
       aria-labelledby="editTitle"
-      aria-hidden="true"
-    >
+      aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -292,8 +264,7 @@
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+              aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <form>
@@ -317,16 +288,14 @@
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
-              id="edit-modal-closer"
-            >
+              id="edit-modal-closer">
               Close
             </button>
             <button
               type="button"
               class="btn btn-success"
               id="editPostBtn"
-              onclick="editPost()"
-            >
+              onclick="editPost()">
               Edit
             </button>
           </div>
@@ -334,6 +303,43 @@
       </div>
     </div>
     <!-- End edit post modal -->
+
+    <!-- Start delete post modal -->
+    <div
+      class="modal fade"
+      id="deletePostModal"
+      tabindex="-1"
+      aria-labelledby="theModalTitle"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="theModalTitle">Do you really want
+              to delete the post?</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              id="delete-modal-closer">
+              Close
+            </button>
+            <button type="button" class="btn btn-danger" id="deletePostBtn"
+              onclick="deletePost()">
+              Delete
+            </button>
+            <input type="hidden" id="postIdInput">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End delete post modal -->
 
     <!-- Start alert -->
     <div
@@ -345,8 +351,7 @@
         right: 0;
         width: fit-contetn;
         z-index: 9999999;
-      "
-    ></div>
+      "></div>
     <!-- End  alert -->
     <!-- End Modals & Alerts -->
 
@@ -355,8 +360,7 @@
       id="add-post"
       class="bg-primary"
       data-bs-toggle="modal"
-      data-bs-target="#postModal"
-    >
+      data-bs-target="#postModal">
       +
     </div>
     <!-- End add post -->

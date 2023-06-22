@@ -165,14 +165,18 @@ function checkPostOwner(authorId, postId, postTitle, postBody, postImage) {
       return `
               <div class="authorOptions">
                 <button
-                  class="btn btn-success editPostBtn"
+                  class="btn btn-outline-success editPostBtn"
                   onclick="openEditPostModal('${postId}','${postTitle}', '${postBody}','${postImage}')"
                   data-bs-toggle="modal"
                   data-bs-target="#editPostModal"
                 >
                   Edit
                 </button>
-                <button class="btn btn-danger">Delete</button>
+                <button class="btn btn-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#deletePostModal"
+                onclick="getPostId(${postId})"
+                >Delete</button>
               </div>
       `;
     } else {
@@ -225,7 +229,7 @@ function editPost() {
     .post(`${baseUrl}/posts/${thePostId}`, formData, { headers: headers })
     .then((response) => {
       console.log(response);
-
+      // Close modal
       document.getElementById("edit-modal-closer").click();
 
       // show success login alert
@@ -237,6 +241,41 @@ function editPost() {
         getPost();
       } else if (window.location.pathname == "/index.html") {
         postContainer.innerHTML = "";
+        getPosts(1);
+      }
+    })
+    .catch((error) => {
+      document.getElementById("editpost-error").innerHTML = error.data.message;
+    });
+}
+
+function getPostId(postId) {
+  console.log(postId);
+
+  postIdInput.value = postId;
+}
+
+// Delete post Function
+function deletePost() {
+  const headers = {
+    "Content-Type": "multipart/form-data",
+    authorization: `Bearer ${localStorage.getItem("token")}`,
+  };
+
+  axios
+    .delete(`${baseUrl}/posts/${postIdInput.value}`, { headers: headers })
+    .then((response) => {
+      // Close modal
+      document.getElementById("delete-modal-closer").click();
+
+      // show success login alert
+      showAlert("Post deleted successfully!");
+
+      if (window.location.pathname == "/postDetails.html") {
+        window.location = `index.html`;
+      } else if (window.location.pathname == "/index.html") {
+        postContainer.innerHTML = "";
+
         getPosts(1);
       }
     })
