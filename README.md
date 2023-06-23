@@ -12,8 +12,10 @@ A small social media website
 ## Features
 
 - Register & Login
-- Add Posts
+- Create Posts
 - Add Comments
+- Edit Posts
+- Delete Posts
 - Profile Page
 - Responsive
 - Good Design
