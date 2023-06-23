@@ -7,13 +7,11 @@ function getPost() {
     .get(`${baseUrl}/posts/${postId}`)
     .then((response) => {
       let post = response.data.data;
-      console.log(post);
 
       // Add post to the page
       addPostToPage(post);
     })
     .catch((error) => {
-      console.log(error);
       postElement.innerHTML = `
       <h3 class="mt-5">${error.message}</h3>
       `;
@@ -24,11 +22,14 @@ getPost();
 
 // Add post to the page function
 function addPostToPage(post) {
+  postAuthorName.innerHTML = `${post.author.name}'s Post`;
   let content = `
 
   <div class="card mt-4 shadow">
   <div class="card-header d-flex" style="justify-content: space-between;">
-  <div class="authorInfo">
+  <div class="authorInfo"  onclick = "goToProfile(${
+    post.author.id
+  })" style=" cursor: pointer;">
   ${handelUserImage(post.author.profile_image)}
     <b>@${post.author.username}</b>
     </div>
@@ -81,10 +82,8 @@ function addPostToPage(post) {
     </div>
 </div>
 `;
-  // TODO: show post tags
 
   postElement.innerHTML = content;
-  console.log(post.comments);
 }
 
 function handelUserImage(userImage) {
@@ -203,7 +202,7 @@ function creatComment(postId) {
 }
 
 // SHow Alert function
-function showAlert(msg) {
+function showAlert(msg, kind) {
   const alertPlaceholder = document.getElementById("theAlert");
   const appendAlert = (message, type) => {
     const wrapper = document.createElement("div");
@@ -217,12 +216,5 @@ function showAlert(msg) {
     alertPlaceholder.append(wrapper);
   };
 
-  appendAlert(msg, "success");
-
-  // TODO: Hide alert after 3 sec
-
-  // setTimeout(() => {
-  //   const alert = bootstrap.Alert.getOrCreateInstance("#theAlert");
-  //   alert.close();
-  // }, 3000);
+  appendAlert(msg, kind || "success");
 }

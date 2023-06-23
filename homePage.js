@@ -7,7 +7,6 @@ function getPosts(num) {
     lastPage = response.data.meta.last_page;
 
     let posts = response.data.data;
-    console.log(posts);
 
     // Add posts to the page
     addPostsToPage(posts);
@@ -21,9 +20,13 @@ function addPostsToPage(posts) {
   for (let i = 0; i < posts.length; i++) {
     let content = `
     <div class="card mt-4 shadow">
-    <div class="card-header d-flex" style="justify-content: space-between;">
+    <div class="card-header d-flex justify-content-between">
 
-    <div class="authorInfo">
+    <div class="authorInfo" data-userId"${
+      posts[i].id
+    }" style="justify-content: space-between; cursor: pointer;" onclick = "goToProfile(${
+      posts[i].author.id
+    })">
     ${handelUserImage(posts[i].author.profile_image)}
       <b>@${posts[i].author.username}</b>
     </div>
@@ -69,7 +72,6 @@ function addPostsToPage(posts) {
     </div>
   </div>
     `;
-    // TODO: show post tags
 
     postContainer.innerHTML += content;
   }
@@ -133,8 +135,6 @@ function newPost() {
   axios
     .post(`${baseUrl}/posts`, formData, { headers: headers })
     .then((response) => {
-      console.log(response);
-
       // Close modal
       document.getElementById("post-modal-closer").click();
 
@@ -146,8 +146,6 @@ function newPost() {
       getPosts(1);
     })
     .catch((error) => {
-      console.log(error);
-
       let errorMsg = error.response.data.message;
 
       document.getElementById("newpost-error").textContent = `${errorMsg}
@@ -179,10 +177,3 @@ window.addEventListener("scroll", () => {
     getPosts(currentPage + 1);
   }
 });
-
-// Go to details of the post
-function goPostDetails(postId) {
-  window.location = `postDetails.html?id=${postId}`;
-}
-
-// Check the owner of the post

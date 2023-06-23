@@ -30,7 +30,7 @@
           <nav
             class="navbar navbar-expand-lg bg-body-tertiary shadow rounded pt-3">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Social Media</a>
+              <a class="navbar-brand" href="index.html">Social Media</a>
               <button
                 class="navbar-toggler"
                 type="button"
@@ -44,10 +44,12 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page"
+                      href="index.html">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" id="profileElement"
+                      style="cursor: pointer;">Profile</a>
                   </li>
                 </ul>
                 <div id="nav-btns-logedout">
@@ -111,16 +113,14 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="username"
-                  value="omarsha6an" />
+                  id="username" />
               </div>
               <div class="mb-3">
                 <label for="password" class="col-form-label">Password:</label>
                 <input
                   type="password"
                   class="form-control"
-                  id="password"
-                  value="123123" />
+                  id="password" />
               </div>
             </form>
             <span style="color: red" id="login-error"></span>
@@ -292,7 +292,7 @@
     <!-- Start alert -->
     <div
       id="theAlert"
-      class="show fade"
+      class="fade show"
       style="
         position: fixed;
         bottom: 0;
@@ -308,7 +308,7 @@
       <!-- Start Posts -->
       <div class="row d-flex justify-content-center mt-5">
         <div class="col-11">
-          <h2><span>Omar's</span> Post</h2>
+          <h2 id="postAuthorName"></h2>
           <div id="post"></div>
         </div>
       </div>

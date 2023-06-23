@@ -14,8 +14,6 @@ function login() {
       password: `${password.value}`,
     })
     .then(function (response) {
-      console.log(response);
-
       // Save token in localstorage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -30,8 +28,6 @@ function login() {
       showAlert("Nice, you loged in successfuly!");
     })
     .catch(function (error) {
-      console.log(error);
-
       let errorMsg = error.response.data.message;
 
       document.getElementById("login-error").textContent = `${errorMsg}
@@ -42,7 +38,7 @@ function login() {
 document.getElementById("the-login-btn").addEventListener("click", login);
 
 // Show  notification alert
-function showAlert(msg) {
+function showAlert(msg, kind) {
   const alertPlaceholder = document.getElementById("theAlert");
   const appendAlert = (message, type) => {
     const wrapper = document.createElement("div");
@@ -56,14 +52,7 @@ function showAlert(msg) {
     alertPlaceholder.append(wrapper);
   };
 
-  appendAlert(msg, "success");
-
-  // TODO: Hide alert after 3 sec
-
-  // setTimeout(() => {
-  //   const alert = bootstrap.Alert.getOrCreateInstance("#theAlert");
-  //   alert.close();
-  // }, 3000);
+  appendAlert(msg, kind || "success");
 }
 
 // Setup UI for loged in user function
@@ -76,7 +65,6 @@ function setupUI() {
     navBtnsLogedIn.style.display = "block";
 
     const userInfo = JSON.parse(localStorage.getItem("user"));
-    console.log(userInfo);
 
     // Add user photo to nav
     const userImage = userInfo.profile_image;
@@ -117,21 +105,16 @@ document.getElementById("logout").addEventListener("click", logout);
 // Register function
 function register() {
   let profilePicInput = profilePic.files[0];
-  // TODO: set a defult photo
-  let formData = new FormData();
 
+  let formData = new FormData();
   formData.append("username", regUsername.value);
   formData.append("name", regName.value);
   formData.append("password", regPassword.value);
   formData.append("image", profilePicInput);
 
-  console.log(profilePicInput);
-
   axios
     .post(`${baseUrl}/register`, formData)
     .then((response) => {
-      console.log(response);
-
       // Save token in localstorage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -146,8 +129,6 @@ function register() {
       showAlert("You have created the account successfully!");
     })
     .catch(function (error) {
-      console.log(error);
-
       let errorMsg = error.response.data.message;
 
       document.getElementById("register-error").textContent = `${errorMsg}
@@ -190,7 +171,6 @@ function checkPostOwner(authorId, postId, postTitle, postBody, postImage) {
 // Open EditPostModal function
 let thePostId;
 function openEditPostModal(postId, postTitle, postBody, postImage) {
-  console.log(postTitle, postBody, postImage);
   thePostId = postId;
 
   let editTitle = document.getElementById("edit-title");
@@ -211,10 +191,6 @@ function editPost() {
   formData.append("body", editBody);
   formData.append("_method", "put");
 
-  console.log(editTitle);
-  console.log(editBody);
-  console.log(thePostId);
-
   // make edit without imge allowed
   if (postImage != undefined) {
     formData.append("image", postImage);
@@ -228,7 +204,6 @@ function editPost() {
   axios
     .post(`${baseUrl}/posts/${thePostId}`, formData, { headers: headers })
     .then((response) => {
-      console.log(response);
       // Close modal
       document.getElementById("edit-modal-closer").click();
 
@@ -242,6 +217,9 @@ function editPost() {
       } else if (window.location.pathname == "/index.html") {
         postContainer.innerHTML = "";
         getPosts(1);
+      } else if (window.location.pathname == "/profile.html") {
+        thePostsContainer.innerHTML = "";
+        getUserPosts();
       }
     })
     .catch((error) => {
@@ -250,8 +228,6 @@ function editPost() {
 }
 
 function getPostId(postId) {
-  console.log(postId);
-
   postIdInput.value = postId;
 }
 
@@ -277,9 +253,30 @@ function deletePost() {
         postContainer.innerHTML = "";
 
         getPosts(1);
+      } else if (window.location.pathname == "/profile.html") {
+        getUserInfo();
+
+        thePostsContainer.innerHTML = "";
+        getUserPosts();
       }
     })
     .catch((error) => {
-      document.getElementById("editpost-error").innerHTML = error.data.message;
+      console.log(error);
+      showAlert(error.response.data.message, "danger");
     });
+}
+
+function goToProfile(userId) {
+  window.location = `profile.html?userId=${userId}`;
+}
+
+profileElement.addEventListener("click", function goToProfile() {
+  if (localStorage.user != null) {
+    window.location = `profile.html?userId=${JSON.parse(localStorage.user).id}`;
+  }
+});
+
+// Go to details of the post
+function goPostDetails(postId) {
+  window.location = `postDetails.html?id=${postId}`;
 }
