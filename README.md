@@ -31,4 +31,4 @@ A small social media website
 
 ## Demo
 
-<a href="https://omarsha6an.github.io/SocialMediaWebsite/">Click Here</a>
+<a href="https://omaralshaafii.github.io/SocialMediaWebsite/">Click Here</a>
